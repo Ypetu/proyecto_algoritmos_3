@@ -1,0 +1,55 @@
+@use 'variables' as custom;
+
+// Log In boton
+
+.gradiente-principal {
+  background: custom.$login-gradient;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.375rem;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: custom.$login-gradient-hover;
+  }
+}
+
+// Log In Inputs focus
+
+.form-control:focus {
+ 
+  border-color: transparent;
+  outline: none;
+  box-shadow: 0 0 8px custom.$color-purple; /* un brillo suave */
+  
+}
+
+
+// Mensaje error en campo log in ::after
+
+.text-error {
+  color: #e63946; // o el color que quieras
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+// input_error
+
+
+.input-error {
+  border: 1px solid #e63946;
+  box-shadow: 0 0 4px rgba(230, 57, 70, 0.3); // sombra más suave y difusa
+  transition: all 0.3s ease-in-out; // animación suave al aplicar/quitar
+}
+
+
+// Delineado dinamico
+
+ .underline {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: #0d6efd; // azul de Bootstrap
+  transition: left 0.3s ease, width 0.3s ease;
+}

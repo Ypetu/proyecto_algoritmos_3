@@ -1,0 +1,27 @@
+// main.scss
+
+// 1. 🎨 Variables primero (sobrescriben Bootstrap)
+@use 'variables' as custom;
+
+// 2. ✏️ Opcional: modificar variables de Bootstrap aquí si querés
+
+// 3. 📦 incluir Bootstrap PASANDO LAS VARIABLES
+
+  @use 'bootstrap/scss/bootstrap' with (
+  $primary: custom.$primary,
+  $secondary: custom.$secondary,
+  $success: custom.$success,
+  $info: custom.$info,
+  $danger: custom.$danger,
+  $font-family-base: custom.$font-family-base
+);
+
+
+// 4. 🔁 Mixins personalizados
+@use 'mixins';
+
+// 5. 🔧 Utilidades propias
+@use 'utilities';
+
+// 6. 🛠️ Overrides específicos
+@use 'overrides';

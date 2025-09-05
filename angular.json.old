@@ -1,5 +1,9 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "./node_modules/            "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles/main.scss"
+            ],lar/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -32,7 +36,8 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/magenta-violet.css",
-              "src/styles/main.scss"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -96,7 +101,8 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/magenta-violet.css",
-              "src/styles/main.scss"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
             ],
             "scripts": []
           }

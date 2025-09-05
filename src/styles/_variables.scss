@@ -1,0 +1,30 @@
+// _variables.scss
+
+// 🎨 Colores
+$color-deep-violet:  #7400B8;
+$color-purple:       #6930C3;
+$color-indigo:       #5E60CE;
+$color-cornflower:   #5390D9;
+$color-sky-blue:     #4EA8DE;
+$color-light-blue:   #48BFE3;
+$color-cyan:         #56CFE1;
+$color-teal:         #64DFDF;
+$color-mint:         #72EFDD;
+$color-light-mint:   #80FFDB;
+
+// 🎯 Asignación a Bootstrap (redefinición)
+$primary: $color-teal !default;
+$secondary: $color-teal !default;
+$success: $color-light-blue !default;
+$info: $color-light-blue !default;
+$danger: $color-deep-violet !default;
+
+// Gradientes
+
+$login-gradient: linear-gradient(135deg, #7400B8, #5390D9, #56CFE1) !default;
+$login-gradient-hover: linear-gradient(135deg, #6930C3, #4EA8DE,#72EFDD) !default;
+$nav-gradient: linear-gradient(135deg, #7400B8, #56CFE1) !default;
+
+// Tipografía (ejemplo)
+$font-family-base: 'Roboto', sans-serif;
+
