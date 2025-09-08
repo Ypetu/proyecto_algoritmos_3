@@ -1,13 +1,13 @@
 // _mixins.scss
 
-// Mixin para flexbox centrado (común en componentes)
+// flexbox centrado 
 @mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-// Mixin para botones con gradiente
+//  botones con gradiente
 @mixin gradient-button($gradient, $hover-gradient) {
   background: $gradient;
   border: none;
@@ -20,7 +20,7 @@
   }
 }
 
-// Mixin para sombreado de tarjetas
+// sombreado de tarjetas
 @mixin card-shadow {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
@@ -30,7 +30,7 @@
   }
 }
 
-// Mixin para campos de formulario estilizados
+// inputs
 @mixin styled-input {
   border-radius: 4px;
   border: 1px solid #e0e0e0;

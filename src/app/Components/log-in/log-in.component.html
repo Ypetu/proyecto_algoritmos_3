@@ -1,25 +1,28 @@
-<div class="login-container">
-  <div class="login-card">
-    <h3 class="login-title">Iniciar Sesión</h3>
+<div class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center mb-4">Iniciar Sesión</h3>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit(); submitted = true">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email</label>
         <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email"
                [ngClass]="{'input-error': (emailControl?.touched || submitted) && emailControl?.errors}">
-        <div *ngIf="(emailControl?.touched || submitted) && emailControl?.errors" class="error-message">
-          <div *ngIf="emailControl?.errors?.['required']">El email es obligatorio.</div>
-          <div *ngIf="emailControl?.errors?.['customEmail']">El email no es válido.</div>
+        <div *ngIf="(emailControl?.touched || submitted) && emailErrorKey" class="text-error">
+          {{ errorMessages.getErrorMessage(emailErrorKey) }}
         </div>
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
+        <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password"
+        [ngClass]="{'input-error': (passwordControl?.touched || submitted) && passwordControl?.errors}">
+        <div *ngIf="(passwordControl?.touched || submitted) && passwordErrorKey" class="text-error">
+          {{ errorMessages.getErrorMessage(passwordErrorKey) }}
+        </div>
       </div>
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
         <label class="form-check-label" for="exampleCheck1">Recordar password</label>
       </div>
-      <button type="submit" class="btn btn-login">Ingresar</button>
+      <button type="submit" class="btn gradiente-principal w-100">Ingresar</button>
     </form>
   </div>
 </div>

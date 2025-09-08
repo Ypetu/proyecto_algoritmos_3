@@ -1,6 +1,6 @@
-// _variables.scss
 
-// 🎨 Colores
+
+// Paleta d ecolores del proyecto
 $color-deep-violet:  #7400B8;
 $color-purple:       #6930C3;
 $color-indigo:       #5E60CE;
@@ -12,9 +12,9 @@ $color-teal:         #64DFDF;
 $color-mint:         #72EFDD;
 $color-light-mint:   #80FFDB;
 
-// 🎯 Asignación a Bootstrap (redefinición)
+//signación a Bootstrap (redefinición de las clases )
 $primary: $color-teal !default;
-$secondary: $color-teal !default;
+$secondary: $color-mint !default;
 $success: $color-light-blue !default;
 $info: $color-light-blue !default;
 $danger: $color-deep-violet !default;

@@ -13,11 +13,31 @@ El dominio final debe tener entre 2 y 4 caracteres (por ejemplo, .com, .org, .ed
 */
 
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  // se le pasa un validador, se verifica q cumpla con la regla. Si no pasa devuelve el objeto customEmailError = true
+  // se le pasa un control de tipo abstractControl ( ya que puede ser un FormControl, FormGroup o FormArray) y retorna un objeto de tipo ValidationErrors o null
   return (control: AbstractControl): ValidationErrors | null => {
+    // en value guardo el valor del control y lo paso a string 
     const value = (control.value || '').toString();
+    // valid guarda  si emailRegex.test(value) es true o false
     const valid = emailRegex.test(value);
+    //return con if ternario si hay error devuelve el objeto customEmailError(asi lo llamamos en el front) = true, sino null
     return !valid ? { customEmailError: true } : null;
   };
 }
+export function customPassworValidator(): ValidatorFn {
 
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+//Expresion regular para validar contraseñas:
+/*La contraseña debe cumplir todas estas condiciones:
+Al menos una letra minúscula
+Al menos una letra mayúscula
+Al menos un número
+Al menos un carácter especial (@$!%*?&)
+Mínimo 8 caracteres
+Solo puede contener letras, números y los caracteres especiales permitidos
+*/
+return (control: AbstractControl): ValidationErrors | null => {
+  const value = (control.value || '').toString();
+  const valid = passwordRegex.test(value);
+  return !valid ? { customPasswordError: true } : null;
+};
+}
