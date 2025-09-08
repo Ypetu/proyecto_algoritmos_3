@@ -23,21 +23,23 @@ El dominio final debe tener entre 2 y 4 caracteres (por ejemplo, .com, .org, .ed
     return !valid ? { customEmailError: true } : null;
   };
 }
-export function customPassworValidator(): ValidatorFn {
+export function customPasswordValidator(): ValidatorFn {
 
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  // Expresión regular modificada para ser más clara y un poco más permisiva
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#._-])[A-Za-z\d@$!%*?&#._-]{8,}$/;
 //Expresion regular para validar contraseñas:
 /*La contraseña debe cumplir todas estas condiciones:
 Al menos una letra minúscula
 Al menos una letra mayúscula
 Al menos un número
-Al menos un carácter especial (@$!%*?&)
+Al menos un carácter especial (@$!%*?&#._-)
 Mínimo 8 caracteres
 Solo puede contener letras, números y los caracteres especiales permitidos
 */
 return (control: AbstractControl): ValidationErrors | null => {
   const value = (control.value || '').toString();
   const valid = passwordRegex.test(value);
+  console.log('Password validación:', value, valid ? 'válido' : 'inválido');
   return !valid ? { customPasswordError: true } : null;
 };
 }

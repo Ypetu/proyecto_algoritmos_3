@@ -1,22 +1,44 @@
 <div class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
   <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
     <h3 class="text-center mb-4">Iniciar Sesión</h3>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(); submitted = true">
+    
+
+    <!--########### Prueba login ###################### -->
+    
+    <!-- Mensajes de éxito o error de login -->
+    <div *ngIf="loginSuccess" class="alert alert-success mb-3">
+      ¡Login exitoso!
+    </div>
+    <div *ngIf="loginError" class="alert alert-danger mb-3">
+      Error en el login. Verifique sus credenciales.
+    </div>
+    
+    <!-- Formulario de inicio de sesión
+     Se crea el FormGroup loginForm y se ejecuta la funcion onSubmit si se envia el formulario -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email"
+        <label for="InputEmail" class="form-label">Email</label>
+           <!-- Uso ngClass para cambiar el recuadro del input a rojo si hay errorers, es submitted y esta tocado -->
+        <input type="email" class="form-control" id="InputEmail" formControlName="email"
                [ngClass]="{'input-error': (emailControl?.touched || submitted) && emailControl?.errors}">
+          <!-- Uso ngIf para mostrar el div de error con el mensaje correspondiente y su estilo -->     
         <div *ngIf="(emailControl?.touched || submitted) && emailErrorKey" class="text-error">
           {{ errorMessages.getErrorMessage(emailErrorKey) }}
         </div>
       </div>
+
+      <!-- Se repite para el bloque de la password-->  
+
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password"
+        <label for="InputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="InputPassword" formControlName="password"
         [ngClass]="{'input-error': (passwordControl?.touched || submitted) && passwordControl?.errors}">
         <div *ngIf="(passwordControl?.touched || submitted) && passwordErrorKey" class="text-error">
           {{ errorMessages.getErrorMessage(passwordErrorKey) }}
         </div>
+        <small class="form-text text-muted mt-1">
+          No comparta sus contraseñas.
+        </small>
       </div>
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">

@@ -26,10 +26,10 @@
 }
 
 
-// Mensaje error en campo log in ::after
+// Mensaje error en campo log in 
 
 .text-error {
-  color: #e63946; // o el color que quieras
+  color: #e63946; 
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
@@ -44,12 +44,4 @@
 }
 
 
-// Delineado dinamico
 
- .underline {
-  position: absolute;
-  bottom: 0;
-  height: 2px;
-  background-color: #0d6efd; // azul de Bootstrap
-  transition: left 0.3s ease, width 0.3s ease;
-}
