@@ -16,6 +16,7 @@ export class LogInComponent {
   submitted = false; // flag formulario enviado
   loginSuccess = false; // flag de exito en login
   loginError = false; // flag error en login
+  mensaje = ''; // mensaje de estado del login
   
   constructor(
     public errorMessages: ErrorMessagesService,
@@ -38,17 +39,18 @@ export class LogInComponent {
     // guardo en constantes los valores de email y password del formulario escritos por el usuario
     const email = this.emailControl?.value || '';
     const password = this.passwordControl?.value || '';
-    // llamo al metodo login del AuthService con email y password y guardo el resultado (true o false) en loginResult
-    const loginResult = this.authService.login(email, password);
+    // llamo al metodo login del AuthService con email y password como objeto ya que implemento la interfaz de loginRequest y guardo el resultado (true o false) en loginResult
+    const loginResult = this.authService.login({ email, password });
     
     if (loginResult) {
       this.loginSuccess = true;
-      console.log('Login exitoso:', email);
-      // Aquí puedes agregar redirección a otra página después del login exitoso
-      // Por ejemplo: this.router.navigate(['/dashboard']);
+      this.mensaje = 'Login exitoso';
+      console.log(this.mensaje, email);
+
     } else {
+      this. mensaje = 'Login fallido';
       this.loginError = true;
-      console.log('Login fallido');
+      console.log(this.mensaje);
     }
   }
 
