@@ -5,7 +5,7 @@
 
 // 2. ✏️ Opcional: modificar variables de Bootstrap aquí si querés
 
-// 3. 📦 incluir Bootstrap PASANDO LAS VARIABLES
+// 3. 📦 incluir Bootstrap PASANDO LAS VARIABLES y reescribiendo los estilos
 
   @use 'bootstrap/scss/bootstrap' with (
   $primary: custom.$primary,

@@ -44,4 +44,14 @@
 }
 
 
+// link
+.link {
+  color: custom.$color-cornflower;
+  text-decoration: none;
+  transition: color 0.3s ease;
 
+  &:hover {
+    color: darken(custom.$color-indigo, 10%);
+    text-decoration: underline;
+  }
+}

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { customEmailValidator, customPasswordValidator } from '../../validators/custom-validators';
 import { ErrorMessagesService } from '../../services/error-messages.service';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -18,9 +19,12 @@ export class LogInComponent {
   loginError = false; // flag error en login
   mensaje = ''; // mensaje de estado del login
   
+
+  // inyeccion de dependencias
   constructor(
-    public errorMessages: ErrorMessagesService,
-    private authService: AuthService
+    public errorMessages: ErrorMessagesService, // servicio de errorres
+    private authService: AuthService, // servicio de autenticacion
+    private router: Router // servicio de enrutamiento
   ) {}
 // formgroup que contiene dos formcontrols: email y password
   loginForm = new FormGroup ({
@@ -46,7 +50,8 @@ export class LogInComponent {
       this.loginSuccess = true;
       this.mensaje = 'Login exitoso';
       console.log(this.mensaje, email);
-
+      // Navegar a la página de inicio después de un login exitoso
+      this.router.navigate(['/home']);
     } else {
       this. mensaje = 'Login fallido';
       this.loginError = true;
