@@ -8,9 +8,19 @@ export interface UserLoginRequest {
     password: string;
 }
 
-// definimos que tiene que tener una sesion
+
+
+// definimos que tiene que tener una sesion 
+// este tipo sera tambien devuelto por la api de login
 export interface UserSession {
-    email: string;
+    id: number;
     nombre?: string;
     rol?: string;
+    email?: string;
+
+    
+}
+//
+export interface sessionTokenResponse { 
+    token?: string;
 }
