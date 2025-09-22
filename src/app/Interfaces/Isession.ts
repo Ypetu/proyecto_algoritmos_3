@@ -20,7 +20,7 @@ export interface UserSession {
 
     
 }
-//
+// formarto de token response -- esto deberia ir en todos los headers de las peticiones a la api
 export interface sessionTokenResponse { 
     token?: string;
 }

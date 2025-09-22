@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserSession, UserLoginRequest,sessionTokenResponse } from '../Interfaces/Isession';
 import { HttpClient } from '@angular/common/http';
-import { API_LOGIN } from '../app.config';
+import { API_LOGIN,API_KEY } from '../app.config';
+import { HttpHeaders } from '@angular/common/http';
 
-// Creo una interfaz con la estructura del usuario que se va a loguear
+
+
 
 
 @Injectable({ providedIn: 'root' })
+
 
 export class AuthService {
     // useSubjet guarda un BehaviorSubject que puede contener un tipo de dato UserSession o null. Es PRIVADO
@@ -43,7 +46,10 @@ export class AuthService {
   // la funcion login hace una peticion post a la api de login con el objeto UserLoginRequest y retorna un observable de sessionTokenResponse.
   //Ese token debera ser enviado en las cabeceras de todas las peticiones posteriorers.  VER DONDE ALMACENAR
   login(UserLoginRequest: UserLoginRequest): Observable<sessionTokenResponse> {
-    return this.http.post<sessionTokenResponse>(API_LOGIN, UserLoginRequest);
-    
+    const headers = new HttpHeaders({
+      'x-api-key': API_KEY
+    });
+    // retorna un observable de sessionTokenResponse y le paso la url ,los datos del usuario mail y pass y las headers con la api key de mi server de postman
+    return this.http.post<sessionTokenResponse>(API_LOGIN, UserLoginRequest, { headers });
   }
 }

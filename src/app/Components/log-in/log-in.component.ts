@@ -6,6 +6,7 @@ import { customEmailValidator, customPasswordValidator } from '../../validators/
 import { ErrorMessagesService } from '../../services/error-messages.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-log-in',
@@ -17,7 +18,7 @@ export class LogInComponent {
   submitted = false; // flag formulario enviado
   loginSuccess = false; // flag de exito en login
   loginError = false; // flag error en login
-  mensaje = ''; // mensaje de estado del login
+
   
 
   // inyeccion de dependencias
@@ -33,8 +34,7 @@ export class LogInComponent {
   })
   onSubmit() {
     this.submitted = true;
-    this.loginSuccess = false;
-    this.loginError = false;
+
     
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -44,19 +44,20 @@ export class LogInComponent {
     const email = this.emailControl?.value || '';
     const password = this.passwordControl?.value || '';
     // llamo al metodo login del AuthService con email y password como objeto ya que implemento la interfaz de loginRequest y guardo el resultado (true o false) en loginResult
-    const loginResult = this.authService.login({ email, password });
+    const loginResult =this.authService.login({ email, password }).subscribe({
+    next: response => {
+    console.log('Token recibido:', response.token);
+    // GUARDO TOKEN EN EL LOCALSTORAGE
+    localStorage.setItem('token', response.token ?? '');
+    // NAVEGO AL HOME
+     this.router.navigate(['/home']);
+  
+  },
+    error: error => {
+    console.log('Login fallido:', email);
+  }
+});
     
-    if (loginResult) {
-      this.loginSuccess = true;
-      this.mensaje = 'Login exitoso';
-      console.log(this.mensaje, email);
-      // Navegar a la página de inicio después de un login exitoso
-      this.router.navigate(['/home']);
-    } else {
-      this. mensaje = 'Login fallido';
-      this.loginError = true;
-      console.log(this.mensaje);
-    }
   }
 
   //*************** */ getters para los campos del formulario*******************//
