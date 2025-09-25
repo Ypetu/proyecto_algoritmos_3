@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, isStandalone } from '@angular/core';
 import  {ReactiveFormsModule} from '@angular/forms';
 import { Validators,FormControl,FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -6,10 +6,11 @@ import { customEmailValidator, customPasswordValidator } from '../../validators/
 import { ErrorMessagesService } from '../../services/error-messages.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { stringify } from 'querystring';
+
 
 @Component({
   selector: 'app-log-in',
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule ],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.scss'
@@ -43,18 +44,19 @@ export class LogInComponent {
     // guardo en constantes los valores de email y password del formulario escritos por el usuario
     const email = this.emailControl?.value || '';
     const password = this.passwordControl?.value || '';
-    // llamo al metodo login del AuthService con email y password como objeto ya que implemento la interfaz de loginRequest y guardo el resultado (true o false) en loginResult
+
+    // llamo al metodo login del AuthService con email y password como objeto ya que implemento la interfaz de loginRequest y me suscribo al observable que retorna
+    
     const loginResult =this.authService.login({ email, password }).subscribe({
     next: response => {
-    console.log('Token recibido:', response.token);
-    // GUARDO TOKEN EN EL LOCALSTORAGE
-    localStorage.setItem('token', response.token ?? '');
-    // NAVEGO AL HOME
+    console.log('Usuario:', response);
+
      this.router.navigate(['/home']);
   
   },
     error: error => {
-    console.log('Login fallido:', email);
+    console.log('Login fallido:', error);
+    this.loginError = true;
   }
 });
     

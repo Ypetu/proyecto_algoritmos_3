@@ -25,7 +25,7 @@ describe('AuthService', () => {
     const mockResponse = { token: '12345' };
 
     service.login(mockRequest).subscribe(response => {
-      expect(response.token).toBe('12345');
+      expect(response.nombre).toBe('12345');
     });
 
     const req = httpMock.expectOne(API_LOGIN);

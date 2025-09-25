@@ -42,6 +42,10 @@
         <a class="link" href="#">¿Olvidó su contraseña?</a>
       </div>
 
+      <div *ngIf="loginError" class="alert alert-danger mt-3" role="alert">
+        Error de inicio de sesión. Por favor, verifique sus credenciales.
+      </div>
+
     </form>
   </div>
 </div>

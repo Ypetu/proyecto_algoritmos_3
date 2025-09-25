@@ -15,12 +15,9 @@ export interface UserLoginRequest {
 export interface UserSession {
     id: number;
     nombre?: string;
+    apellido?: string;
     rol?: string;
     email?: string;
 
     
-}
-// formarto de token response -- esto deberia ir en todos los headers de las peticiones a la api
-export interface sessionTokenResponse { 
-    token?: string;
 }
