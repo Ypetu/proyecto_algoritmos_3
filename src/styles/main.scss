@@ -1,3 +1,5 @@
+
+
 // main.scss
 
 // 1. 🎨 Variables primero (sobrescriben Bootstrap)
@@ -13,7 +15,9 @@
   $success: custom.$success,
   $info: custom.$info,
   $danger: custom.$danger,
-  $font-family-base: custom.$font-family-base
+  $font-family-base: custom.$font-family-base,
+  $dark: custom.$dark,
+  $light: custom.$light
 );
 
 
@@ -25,3 +29,5 @@
 
 // 6. 🛠️ Overrides específicos
 @use 'overrides';
+
+@import 'bootstrap-icons/font/bootstrap-icons.css';

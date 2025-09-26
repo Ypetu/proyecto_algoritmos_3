@@ -39,7 +39,7 @@ Solo puede contener letras, números y los caracteres especiales permitidos
 return (control: AbstractControl): ValidationErrors | null => {
   const value = (control.value || '').toString();
   const valid = passwordRegex.test(value);
-  console.log('Password validación:', value, valid ? 'válido' : 'inválido');
+  //console.log('Password validación:', value, valid ? 'válido' : 'inválido');
   return !valid ? { customPasswordError: true } : null;
 };
 }

@@ -22,10 +22,13 @@ export class HomeComponent implements OnInit{
   ngOnInit() {
     this.authService.user$.subscribe(user => {
       this.user = user; // actualizo la variable user con el valor emitido por el observable
+      console.log('Usuario en HomeComponent:', this.user);
     });
   }
 
-  logOut() {
+  logOut(event?: Event) {
+    //prevengo el comportamiento por defecto del evento click
+    if (event) event.preventDefault();
     //INVOCO EL METODO LOGOUT DEL SERVICIO DE AUTENTICACION
     this.authService.logout();  
     this.router.navigate(['/login']); // FUERZO AL LOGiN

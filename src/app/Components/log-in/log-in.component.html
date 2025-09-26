@@ -14,7 +14,7 @@
         <input type="email" class="form-control" id="InputEmail" formControlName="email"
                [ngClass]="{'input-error': (emailControl?.touched || submitted) && emailControl?.errors}">
           <!-- Uso ngIf para mostrar el div de error con el mensaje correspondiente y su estilo -->     
-        <div *ngIf="(emailControl?.touched || submitted) && emailErrorKey" class="text-error">
+        <div *ngIf="(emailControl?.touched || submitted || emailControl?.dirty) && emailErrorKey" class="text-error">
           {{ errorMessages.getErrorMessage(emailErrorKey) }}
         </div>
       </div>
@@ -23,17 +23,27 @@
 
       <div class="mb-3">
         <label for="InputPassword" class="form-label">Password</label>
-        <input type="password" class="form-control" id="InputPassword" formControlName="password"
-        [ngClass]="{'input-error': (passwordControl?.touched || submitted) && passwordControl?.errors}">
-        <div *ngIf="(passwordControl?.touched || submitted) && passwordErrorKey" class="text-error">
-          {{ errorMessages.getErrorMessage(passwordErrorKey) }}
-        </div>
-        <small class="form-text text-muted mt-1">
-          No comparta sus contraseñas.
-        </small>
+          <div class="input-group">
+            <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="InputPassword" formControlName="password"
+            [ngClass]="{'input-error': (passwordControl?.touched || submitted) && passwordControl?.errors}">
+            <button type="button" class="btn btn-outline-dark" (click)="showPassword = !showPassword" tabindex="-1">
+              <span *ngIf="!showPassword">
+                <i class="bi bi-eye"></i>
+              </span>
+              <span *ngIf="showPassword">
+                <i class="bi bi-eye-slash"></i>
+              </span>
+            </button>
+          </div>
+          <div *ngIf="(passwordControl?.touched || submitted || passwordControl?.dirty) && passwordErrorKey" class="text-error">
+            {{ errorMessages.getErrorMessage(passwordErrorKey) }}
+          </div>
+          <small class="form-text text-muted mt-1">
+            No comparta sus contraseñas.
+          </small>
       </div>
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <input type="checkbox" class="form-check-input" id="rememberMe" formControlName="rememberMe">
         <label class="form-check-label" for="exampleCheck1">Recordar password</label>
       </div>
       <button type="submit" class="btn gradiente-principal w-100">Ingresar</button>

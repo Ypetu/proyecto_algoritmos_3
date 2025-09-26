@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { UserSession, UserLoginRequest } from '../Interfaces/Isession';
+import { UserSession, UserLoginRequest,AuthLoginResponse } from '../Interfaces/Isession';
 import { HttpClient } from '@angular/common/http';
 import { API_LOGIN,API_KEY } from '../app.config';
 import { HttpHeaders } from '@angular/common/http';
@@ -31,20 +31,19 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.userSubject.value !== null;
-    
   }
 
 
   // la funcion login hace una peticion post a la api de login con el objeto UserLoginRequest y retorna un observable de sessionTokenResponse.
   //Ese token debera ser enviado en las cabeceras de todas las peticiones posteriorers.  VER DONDE ALMACENAR
-  login(UserLoginRequest: UserLoginRequest): Observable<UserSession> {
+  login(UserLoginRequest: UserLoginRequest): Observable<AuthLoginResponse> {
     const headers = new HttpHeaders({
       'x-api-key': API_KEY
     });
     // retorna un observable de UserSession y le paso la url ,los datos del usuario mail y pass y las headers con la api key de mi server de postman
-     return this.http.post<UserSession>(API_LOGIN, UserLoginRequest, { headers }).pipe(
+     return this.http.post<AuthLoginResponse>(API_LOGIN, UserLoginRequest, { headers }).pipe(
     tap(session => {
-      this.userSubject.next(session); // Actualiza el observable con la sesión recibida
+      this.userSubject.next(session.user); // Actualiza el observable con los datos de usuario unicamente
     })
   );
 }

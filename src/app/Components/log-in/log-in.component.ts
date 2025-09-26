@@ -6,6 +6,7 @@ import { customEmailValidator, customPasswordValidator } from '../../validators/
 import { ErrorMessagesService } from '../../services/error-messages.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { response } from 'express';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class LogInComponent {
   submitted = false; // flag formulario enviado
   loginSuccess = false; // flag de exito en login
   loginError = false; // flag error en login
+  showPassword = false; // controla visibilidad de la contraseña
 
   
 
@@ -31,7 +33,8 @@ export class LogInComponent {
 // formgroup que contiene dos formcontrols: email y password
   loginForm = new FormGroup ({
     email: new FormControl('', [Validators.required, customEmailValidator()]),
-    password: new FormControl('', [Validators.required, customPasswordValidator()])
+    password: new FormControl('', [Validators.required, customPasswordValidator()]),
+    rememberMe: new FormControl(false)
   })
   onSubmit() {
     this.submitted = true;
@@ -44,12 +47,19 @@ export class LogInComponent {
     // guardo en constantes los valores de email y password del formulario escritos por el usuario
     const email = this.emailControl?.value || '';
     const password = this.passwordControl?.value || '';
+    const rem = this.rememberMeControl?.value || false;
+    
 
     // llamo al metodo login del AuthService con email y password como objeto ya que implemento la interfaz de loginRequest y me suscribo al observable que retorna
     
     const loginResult =this.authService.login({ email, password }).subscribe({
     next: response => {
     console.log('Usuario:', response);
+    if (rem){
+      // GUARDO EL REFRESHtOKEN DE LARGOPLAZO PARA RECORDAR SESION
+
+    localStorage.setItem('refreshToken', response.refreshToken);
+    }
 
      this.router.navigate(['/home']);
   
@@ -82,7 +92,9 @@ export class LogInComponent {
     return this.loginForm.get('password');
   }
  
-
+  get rememberMeControl() {
+    return this.loginForm.get('rememberMe');
+  }
 
  //   //*************** */ getters para los errores del formulario   provenientes del servicio de mensajes de error*******************//
   //devuelven la clave del primer error de validacion que tenga el campo email o password accediendo a la propiedad errors del getter del formControl.
@@ -96,6 +108,6 @@ export class LogInComponent {
     const errors = this.passwordControl?.errors;
     return errors ? Object.keys(errors)[0] : null;
   }
+  
 
 }
-

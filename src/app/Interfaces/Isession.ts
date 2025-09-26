@@ -14,10 +14,20 @@ export interface UserLoginRequest {
 // este tipo sera tambien devuelto por la api de login
 export interface UserSession {
     id: number;
-    nombre?: string;
-    apellido?: string;
+    name?: string;
+    lastName?: string;
     rol?: string;
     email?: string;
 
     
+} // defino la interfase AuthLoginResponse que es la respuesta de la api al hacer login
+
+export interface AuthLoginResponse {
+    
+        accessToken: string;
+        refreshToken: string;
+        expiresIn: number;
+        user: UserSession;
 }
+  
+
