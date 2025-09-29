@@ -47,20 +47,15 @@ export class LogInComponent {
     // guardo en constantes los valores de email y password del formulario escritos por el usuario
     const email = this.emailControl?.value || '';
     const password = this.passwordControl?.value || '';
-    const rem = this.rememberMeControl?.value || false;
+    const rememberMe = this.rememberMeControl?.value || false;
     
 
     // llamo al metodo login del AuthService con email y password como objeto ya que implemento la interfaz de loginRequest y me suscribo al observable que retorna
-    
-    const loginResult =this.authService.login({ email, password }).subscribe({
+
+    const loginResult =this.authService.login({ email, password, rememberMe }).subscribe({
     next: response => {
-    console.log('Usuario:', response);
-    if (rem){
-      // GUARDO EL REFRESHtOKEN DE LARGOPLAZO PARA RECORDAR SESION
-
-    localStorage.setItem('refreshToken', response.refreshToken);
-    }
-
+    console.log('Usuario:', response)
+    // navego al home
      this.router.navigate(['/home']);
   
   },
