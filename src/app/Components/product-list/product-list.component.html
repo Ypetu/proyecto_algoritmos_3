@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Productos disponibles</h2>
+
+  <!-- Lista de productos si el array tiene más de un elemento -->
+  <div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="products.length > 0">
+    <div class="col" *ngFor="let product of products">
+      <div class="card h-100">
+
+        <a [routerLink]="['/product-detail', product.id]" class="text-decoration-none">
+          <img [src]="product.image" class="card-img-top p-3" [alt]="product.title" style="height: 200px; object-fit: contain;">
+          <div class="card-body">
+            <h5 class="card-title text-dark">{{ product.title | titlecase | slice:0:25 }}{{ product.title.length > 25 ? '...' : '' }}</h5>
+            <p class="card-text text-black">{{ product.description | slice:0:80 }}{{ product.description.length > 80 ? '...' : '' }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="fw-bold text-primary">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</span>
+              <button class="btn btn-primary btn-sm">Agregar al carrito</button>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje cuando no hay productos -->
+  <div class="alert alert-info" *ngIf="products.length === 0">
+    No hay productos disponibles en este momento.
+  </div>
+
+
+

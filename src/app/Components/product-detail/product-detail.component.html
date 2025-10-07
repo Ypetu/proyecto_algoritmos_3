@@ -1,0 +1,36 @@
+
+<div class="container mt-5">
+ 
+
+  <!-- Mensaje de error -->
+
+
+  <!-- Detalles del producto -->
+  <div class="row" *ngIf="product ">
+    <div class="col-md-5">
+      <img [src]="product.image" class="img-fluid rounded" [alt]="product.title">
+    </div>
+    <div class="col-md-7">
+      <h2 class="mb-3">{{ product.title | titlecase }}</h2>
+      
+      <div class="d-flex align-items-center mb-3">
+        <span class="badge bg-primary me-2">{{ product.category }}</span>
+        <div class="ms-auto">
+          <span class="fs-4 fw-bold text-primary">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</span>
+        </div>
+      </div>
+      
+      <p class="mb-4">{{ product.description }}</p>
+      
+      
+      <div class="d-flex">
+        <button class="btn btn-primary me-2">
+          <i class="bi bi-cart-plus me-1"></i> Agregar al carrito
+        </button>
+        <button class="btn btn-outline-secondary" [routerLink]="['/product-list']">
+          <i class="bi bi-arrow-left me-1"></i> Volver a la lista
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -35,7 +35,7 @@
               </span>
             </button>
           </div>
-          <div *ngIf="(passwordControl?.touched || submitted || passwordControl?.dirty) && passwordErrorKey" class="text-error">
+          <div *ngIf="(passwordControl?.touched || submitted ) && passwordErrorKey" class="text-error">
             {{ errorMessages.getErrorMessage(passwordErrorKey) }}
           </div>
           <small class="form-text text-muted mt-1">

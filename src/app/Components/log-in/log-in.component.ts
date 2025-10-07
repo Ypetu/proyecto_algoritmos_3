@@ -55,8 +55,8 @@ export class LogInComponent {
     const loginResult =this.authService.login({ email, password, rememberMe }).subscribe({
     next: response => {
     console.log('Usuario:', response)
-    // navego al home
-     this.router.navigate(['/home']);
+    // navego directamente al listado de productos
+     this.router.navigate(['/product-list']);
   
   },
     error: error => {

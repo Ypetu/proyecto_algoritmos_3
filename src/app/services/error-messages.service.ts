@@ -12,7 +12,8 @@ export class ErrorMessagesService {
       case 'customEmailError':
         return 'El email no es válido.';
       case 'customPasswordError':
-        return 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.';
+        return 'La contraseña es inválida. Usar Pass.123@';
+
       default:
         return '';
     }
