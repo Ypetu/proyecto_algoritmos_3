@@ -6,7 +6,7 @@ import { CartItem } from '../Interfaces/IcartItem';
 @Injectable({
   providedIn: 'root'
 })
-export class CartServiceService {
+export class CartService {
 
   // creo el array de los productos del carrito
   cartItems: CartItem[] = [];
@@ -41,10 +41,12 @@ export class CartServiceService {
     }
   }
 
-  // función para eliminar items del carrito (simplificada)
+  // función para eliminar items del carrito
+  
   removeFromCart(productId: number) {
+    // Busco el índice del producto en el carrito
     const itemIndex = this.cartItems.findIndex(item => item.productId === productId);
-    
+    // Si lo encuentro, lo elimino del array y decremento el contador
     if (itemIndex > -1) {
       this.cartItems.splice(itemIndex, 1);
       this.cartCount -= 1;

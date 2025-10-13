@@ -13,6 +13,7 @@
             <p class="card-text text-black">{{ product.description | slice:0:80 }}{{ product.description.length > 80 ? '...' : '' }}</p>
             <div class="d-flex justify-content-between align-items-center">
               <span class="fw-bold text-primary">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</span>
+              <!-- Botón para agregar o quitar del carrito, la funcion toggle cambia el estado del boton del producto especifico mandando el id del producto -->
               <button class="btn btn-sm" 
                      [ngClass]="{'btn-primary': !productsInCart[product.id], 'btn-danger': productsInCart[product.id]}" 
                      (click)="toggleProductCart(product.id)">
