@@ -1,0 +1,89 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Carrito de Compras</h2>
+  
+  <!-- Mensaje cuando el carrito está vacío -->
+  <div *ngIf="cartItems.length === 0" class="alert alert-info">
+    El carrito está vacío. ¡Agrega algunos productos!
+  </div>
+
+  <!-- Tabla de productos en el carrito -->
+  <div *ngIf="cartItems.length > 0" class="card">
+    <div class="card-header bg-primary text-white">
+      Productos en tu carrito
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cartItems">
+              <td>
+                <div class="d-flex align-items-center">
+                  <img [src]="item.product.image" alt="{{ item.product.title }}" 
+                       class="me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                  <span>{{ item.product.title }}</span>
+                </div>
+              </td>
+              <td>${{ item.product.price }}</td>
+              <td>
+                <div class="d-flex align-items-center" style="max-width: 140px;">
+                  <div class="input-group flex-nowrap">
+                    <button class="btn btn-outline-secondary" type="button" 
+                            (click)="updateQuantity(item.product.id, item.quantity - 1)" 
+                            [disabled]="item.quantity <= 1">
+                      <i class="bi bi-dash"></i>
+                    </button>
+                    <input type="number" class="form-control text-center" 
+                           [(ngModel)]="item.quantity" 
+                           (ngModelChange)="updateQuantity(item.product.id, $event)"
+                           min="1" max="10"
+                           style="width: 55px; font-size: 1rem; padding: 0.375rem 0.25rem; flex: 0 0 auto;">
+                    <button class="btn btn-outline-secondary" type="button" 
+                            (click)="updateQuantity(item.product.id, item.quantity + 1)"
+                            [disabled]="item.quantity >= 10">
+                      <i class="bi bi-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </td>
+              <td>${{ item.product.price * item.quantity | number:'1.2-2' }}</td>
+              <td>
+                <button class="btn btn-sm btn-danger" (click)="removeItem(item.product.id)">
+                  <i class="bi bi-trash"></i> Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Resumen del carrito -->
+      <div class="card mt-3">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <span class="fw-bold">Total:</span>
+            <span class="fw-bold">${{ cartTotal | number:'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="d-flex justify-content-between mt-3">
+        <button class="btn btn-secondary" routerLink="/product-list">
+          <i class="bi bi-arrow-left"></i> Seguir comprando
+        </button>
+        <button class="btn btn-success">
+          <i class="bi bi-credit-card"></i> Proceder al pago
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

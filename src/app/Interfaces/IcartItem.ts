@@ -1,11 +1,7 @@
 import { Product } from './IProducts';
 
-export interface CartItem {
-  productId: number;     // ID del producto
-  quantity: number;      // Cantidad del producto en el carrito
-}
 
-export interface CartItemDetail {
+export interface CartItem {
   product: Product;      // Toda la información del producto
   quantity: number;      // Cantidad del producto en el carrito
 }

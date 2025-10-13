@@ -5,6 +5,7 @@ import { NosotrosComponent } from './Components/nosotros/nosotros.component';
 import { authGuard } from './guards/auth.guard';
 import { ProductListComponent } from './Components/product-list/product-list.component';
 import { ProductDetailComponent } from './Components/product-detail/product-detail.component';
+import { CartComponent } from './Components/cart/cart.component';
 
 
 
@@ -26,6 +27,7 @@ export const routes: Routes = [
       { path: 'product-list', component: ProductListComponent },
       { path: 'product-detail/:id', component: ProductDetailComponent },
       { path: 'nosotros', component: NosotrosComponent },
+      { path: 'carrito', component: CartComponent },
       { path: 'home', redirectTo: 'product-list', pathMatch: 'full' }
     ]
   }
