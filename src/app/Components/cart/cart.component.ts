@@ -45,6 +45,7 @@ export class CartComponent implements OnInit {
 
   // Calcula el total del carrito
   calculateTotal(): void {
+    //funcion reduce para sumar los totales por cada item
     this.cartTotal = this.cartItems.reduce((total, item) => {
       return total + (item.product.price * item.quantity);
     }, 0);
