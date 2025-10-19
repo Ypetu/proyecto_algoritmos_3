@@ -15,14 +15,14 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: 'carrito',
-    renderMode: RenderMode.Server
+    renderMode: RenderMode.Prerender
   },
   {
     path: 'product-detail/**',
-    renderMode: RenderMode.Server
+    renderMode: RenderMode.Prerender
   },
   {
     path: '**',
-    renderMode: RenderMode.Server
+    renderMode: RenderMode.Prerender
   }
 ];
