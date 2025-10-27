@@ -1,0 +1,61 @@
+.nosotros-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.example-card {
+  max-width: 400px;
+  box-shadow: 0 0 15px 1px #0000009f;
+  background-color: #4EA8DE;
+}
+
+.mat-mdc-card-header{
+  padding-bottom: 1em;
+  display: flex;
+  align-items: center;
+}
+.mat-mdc-card-avatar{
+  margin: 0;
+}
+.mat-mdc-card-header-text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+
+.example-card:first-child .example-header-image {
+  background-image: url('https://pbs.twimg.com/profile_images/1726238338468753408/yBd4fNMJ_400x400.jpg');
+  background-size: cover;
+}
+.example-card:nth-child(2) .example-header-image {
+  background-image: url('https://media.licdn.com/dms/image/v2/D4D03AQHXCGK6xnvt-g/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1703621570409?e=1762992000&v=beta&t=qKhWR7_fchWf2vTk5v4MnUuk1TMQWvwKcKOUjL_NSt8');
+  background-size: cover;
+}
+.example-card:nth-child(3) .example-header-image {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoHhzKTwKEuZoa49MF53460nXK8AS8mx_FXA&s');
+  background-size: cover;
+}
+
+.image-title {
+  font-size: 20px;
+  color: #fff
+}
+
+mat-card-content{
+    padding-inline: 2em;
+    padding-top: 1em;
+}
+
+.nosotros__container-p{
+    display: flex;
+    text-align: justify;
+    flex-direction: column;
+    
+}
+.nosotros__container-p p{
+    color: white;
+}
