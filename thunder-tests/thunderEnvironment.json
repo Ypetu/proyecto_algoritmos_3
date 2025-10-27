@@ -1,0 +1,24 @@
+{
+  "client": "Thunder Client",
+  "environmentName": "MockAPI - Desarrollo",
+  "dateExported": "2025-10-27T17:30:00.000Z",
+  "version": "1.0",
+  "variables": [
+    {
+      "name": "baseUrl",
+      "value": "https://68ff8330e02b16d1753e48c8.mockapi.io/compras/Compras"
+    },
+    {
+      "name": "compraId",
+      "value": "12"
+    },
+    {
+      "name": "userId",
+      "value": "user123"
+    },
+    {
+      "name": "status",
+      "value": "completed"
+    }
+  ]
+}

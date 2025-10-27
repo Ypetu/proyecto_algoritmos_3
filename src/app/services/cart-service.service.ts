@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { EventEmitter, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Product } from '../Interfaces/IProducts';  
 import { CartItem } from '../Interfaces/IcartItem';
+import { Purchase, CreatePurchaseRequest } from '../Interfaces/IPurchase';
+import { API_COMPRAS } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +21,10 @@ export class CartService {
 
   @Output() cartUpdated = new EventEmitter<number>();
 
+  // URL del endpoint de MockAPI
+  private apiUrl = API_COMPRAS;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
 
   // función para agregar al carrito items (simplificada sin cantidades)
@@ -80,6 +86,61 @@ export class CartService {
       // Pero notificamos el cambio para actualizar la UI
       this.cartUpdated.emit(this.cartCount);
     }
-  }  }
+  }
+
+  // Método para obtener el total del carrito
+  getTotal(): number {
+    return this.cartItems.reduce((total, item) => {
+      return total + (item.product.price * item.quantity);
+    }, 0);
+  }
+
+  // Método para obtener los items del carrito
+  getCartItems(): CartItem[] {
+    return this.cartItems;
+  }
+
+  // Método para limpiar el carrito después de una compra exitosa
+  clearCart(): void {
+    this.cartItems = [];
+    this.cartCount = 0;
+    this.cartUpdated.emit(this.cartCount);
+  }
+
+  // Método para crear una compra en MockAPI
+  createPurchase(userId: string, customerEmail: string): Observable<Purchase> {
+    const purchaseData = {
+      userId: userId,
+      customerEmail: customerEmail,
+      items: this.cartItems.map(item => ({
+        productId: item.product.id,
+        title: item.product.title,
+        price: item.product.price,
+        quantity: item.quantity
+      })),
+      total: this.getTotal(),
+      status: 'completed',
+      date: new Date().toISOString()
+    };
+
+    return this.http.post<Purchase>(this.apiUrl, purchaseData);
+  }
+
+  // Método para obtener el historial de compras de un usuario
+  getPurchaseHistory(userId: string): Observable<Purchase[]> {
+    return this.http.get<Purchase[]>(`${this.apiUrl}?userId=${userId}`);
+  }
+
+  // Método para obtener todas las compras (admin)
+  getAllPurchases(): Observable<Purchase[]> {
+    return this.http.get<Purchase[]>(this.apiUrl);
+  }
+
+  // Método para obtener una compra específica por ID
+  getPurchaseById(purchaseId: string): Observable<Purchase> {
+    return this.http.get<Purchase>(`${this.apiUrl}/${purchaseId}`);
+  }
+
+}
 
 

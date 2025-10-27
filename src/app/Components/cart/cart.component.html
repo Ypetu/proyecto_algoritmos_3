@@ -80,8 +80,11 @@
         <button class="btn btn-secondary" routerLink="/product-list">
           <i class="bi bi-arrow-left"></i> Seguir comprando
         </button>
-        <button class="btn btn-success">
-          <i class="bi bi-credit-card"></i> Proceder al pago
+        <button class="btn btn-success" 
+                [disabled]="cartItems.length === 0"
+                (click)="proceedToPayment()">
+          <i class="bi bi-credit-card"></i> 
+          Proceder al pago
         </button>
       </div>
     </div>

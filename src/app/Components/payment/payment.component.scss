@@ -1,0 +1,263 @@
+// Importar variables del proyecto
+@import '../../../styles/variables';
+
+// Asegurar fondo blanco en todo el componente
+:host {
+  background: #ffffff;
+  display: block;
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+.container {
+  background: #ffffff;
+}
+
+.payment-card {
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(116, 0, 184, 0.15);
+  border-radius: 16px;
+  border: 1px solid rgba(86, 207, 225, 0.2);
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.payment-form {
+  padding: 1rem 0;
+  background: #ffffff;
+}
+
+mat-card-content {
+  background: #ffffff;
+  padding: 1.5rem;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+mat-card-header {
+  background: $nav-gradient;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 16px 16px 0 0;
+  
+  mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  mat-card-subtitle {
+    color: $color-light-mint;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+    text-shadow: 0 1px 3px rgba(116, 0, 184, 0.2);
+  }
+}
+
+mat-card-actions {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(86, 207, 225, 0.3);
+  background: #ffffff;
+  
+  button {
+    margin-left: 0.5rem;
+    
+    &[color="primary"] {
+      background: $color-sky-blue;
+      color: white;
+      border: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: darken($color-sky-blue, 10%);
+        box-shadow: 0 4px 12px rgba(78, 168, 222, 0.3);
+      }
+      
+      &:disabled {
+        background: rgba(78, 168, 222, 0.5);
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+  }
+}
+
+// Estilos para campos de formulario
+mat-form-field {
+  transition: all 0.3s ease-in-out;
+  
+  &.mat-focused {
+    transform: translateY(-2px);
+    
+    .mat-form-field-outline {
+      border-color: $color-teal !important;
+      border-width: 2px;
+    }
+    
+    .mat-form-field-label {
+      color: $color-teal !important;
+    }
+  }
+  
+  .mat-form-field-outline {
+    border-color: rgba(94, 96, 206, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .mat-form-field-label {
+    color: $color-indigo;
+    font-weight: 500;
+  }
+  
+  // Mejorar contraste de labels cuando están flotando
+  &.mat-form-field-should-float .mat-form-field-label {
+    color: $color-indigo !important;
+    font-size: 0.85rem;
+  }
+  
+  .mat-icon {
+    color: $color-cornflower;
+  }
+  
+  // Texto del input en negro para mejor legibilidad
+  input {
+    color: #000000 !important;
+    font-weight: normal;
+    font-size: 1rem;
+    
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.4) !important;
+      font-weight: normal;
+    }
+    
+    // Todos los inputs con peso normal
+    &[formControlName="cardNumber"],
+    &[formControlName="cardholderName"],
+    &[formControlName="expiryDate"],
+    &[formControlName="cvv"] {
+      color: #000000 !important;
+      font-weight: normal;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 576px) {
+  .payment-card {
+    margin: 0 1rem;
+  }
+  
+  mat-card-actions {
+    flex-direction: column;
+    
+    button {
+      width: 100%;
+      margin: 0.25rem 0;
+    }
+  }
+}
+
+// Estados de validación
+.mat-form-field.mat-form-field-invalid {
+  .mat-form-field-outline {
+    border-color: $color-deep-violet !important;
+    border-width: 2px;
+    animation: shake 0.3s ease-in-out;
+  }
+  
+  .mat-form-field-label {
+    color: $color-deep-violet !important;
+  }
+  
+  .mat-icon {
+    color: $color-deep-violet !important;
+  }
+  
+  // El texto sigue siendo negro incluso en error
+  input {
+    color: #000000 !important;
+  }
+}
+
+.mat-form-field.ng-valid.ng-touched {
+  .mat-form-field-outline {
+    border-color: $color-light-blue !important;
+    border-width: 2px;
+  }
+  
+  .mat-form-field-label {
+    color: $color-light-blue !important;
+  }
+  
+  .mat-icon {
+    color: $color-light-blue !important;
+  }
+  
+  // El texto sigue siendo negro incluso cuando es válido
+  input {
+    color: #000000 !important;
+    font-weight: normal;
+  }
+}
+
+// Animación para campos inválidos
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+// Estilos para el botón de procesamiento
+.processing {
+  .mat-button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+// Estilos para el total
+.total-amount {
+  background: linear-gradient(135deg, $color-teal 0%, $color-mint 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+// Botón de volver
+.back-button {
+  color: $color-indigo !important;
+  border: 1px solid rgba(94, 96, 206, 0.3) !important;
+  transition: all 0.3s ease;
+  
+  &:hover:not(:disabled) {
+    background-color: rgba(94, 96, 206, 0.1) !important;
+    border-color: $color-indigo !important;
+    transform: translateY(-1px);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    color: rgba(94, 96, 206, 0.5) !important;
+  }
+}
+
+// Efectos adicionales para el card
+.payment-card {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(116, 0, 184, 0.2);
+  }
+}

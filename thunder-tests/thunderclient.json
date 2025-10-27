@@ -1,0 +1,188 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "MockAPI - Compras",
+  "dateExported": "2025-10-27T17:30:00.000Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "id": "compras-folder",
+      "name": "📦 Gestión de Compras",
+      "containerId": "",
+      "created": "2025-10-27T17:30:00.000Z",
+      "sortNum": 10000
+    }
+  ],
+  "requests": [
+    {
+      "id": "get-all-compras",
+      "name": "📋 Obtener Todas las Compras",
+      "url": "https://68ff8330e02b16d1753e48c8.mockapi.io/compras/Compras",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2025-10-27T17:30:00.000Z",
+      "modified": "2025-10-27T17:30:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "containerId": "compras-folder"
+    },
+    {
+      "id": "get-compra-by-id",
+      "name": "🔍 Obtener Compra por ID",
+      "url": "https://68ff8330e02b16d1753e48c8.mockapi.io/compras/Compras/{{compraId}}",
+      "method": "GET",
+      "sortNum": 20000,
+      "created": "2025-10-27T17:30:00.000Z",
+      "modified": "2025-10-27T17:30:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "containerId": "compras-folder"
+    },
+    {
+      "id": "create-compra",
+      "name": "➕ Crear Nueva Compra",
+      "url": "https://68ff8330e02b16d1753e48c8.mockapi.io/compras/Compras",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2025-10-27T17:30:00.000Z",
+      "modified": "2025-10-27T17:30:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"userId\": \"user123\",\n  \"customerEmail\": \"cliente@ejemplo.com\",\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"title\": \"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops\",\n      \"price\": 109.95,\n      \"quantity\": 1\n    },\n    {\n      \"productId\": 2,\n      \"title\": \"Mens Casual Premium Slim Fit T-Shirts\",\n      \"price\": 22.30,\n      \"quantity\": 2\n    }\n  ],\n  \"total\": 154.55,\n  \"status\": \"completed\",\n  \"date\": \"2025-10-27T17:30:00.000Z\"\n}",
+        "form": []
+      },
+      "tests": [],
+      "containerId": "compras-folder"
+    },
+    {
+      "id": "get-compras-by-user",
+      "name": "👤 Obtener Compras por Usuario",
+      "url": "https://68ff8330e02b16d1753e48c8.mockapi.io/compras/Compras?userId={{userId}}",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2025-10-27T17:30:00.000Z",
+      "modified": "2025-10-27T17:30:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [
+        {
+          "name": "userId",
+          "value": "user123",
+          "isPath": false
+        }
+      ],
+      "tests": [],
+      "containerId": "compras-folder"
+    },
+    {
+      "id": "update-compra",
+      "name": "✏️ Actualizar Compra",
+      "url": "https://68ff8330e02b16d1753e48c8.mockapi.io/compras/Compras/{{compraId}}",
+      "method": "PUT",
+      "sortNum": 50000,
+      "created": "2025-10-27T17:30:00.000Z",
+      "modified": "2025-10-27T17:30:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"status\": \"cancelled\"\n}",
+        "form": []
+      },
+      "tests": [],
+      "containerId": "compras-folder"
+    },
+    {
+      "id": "delete-compra",
+      "name": "🗑️ Eliminar Compra",
+      "url": "https://68ff8330e02b16d1753e48c8.mockapi.io/compras/Compras/{{compraId}}",
+      "method": "DELETE",
+      "sortNum": 60000,
+      "created": "2025-10-27T17:30:00.000Z",
+      "modified": "2025-10-27T17:30:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "containerId": "compras-folder"
+    },
+    {
+      "id": "create-compra-simple",
+      "name": "🛒 Crear Compra Simple (1 producto)",
+      "url": "https://68ff8330e02b16d1753e48c8.mockapi.io/compras/Compras",
+      "method": "POST",
+      "sortNum": 35000,
+      "created": "2025-10-27T17:30:00.000Z",
+      "modified": "2025-10-27T17:30:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"userId\": \"usuario456\",\n  \"customerEmail\": \"test@tiendabeltran.com\",\n  \"items\": [\n    {\n      \"productId\": 3,\n      \"title\": \"Mens Cotton Jacket\",\n      \"price\": 55.99,\n      \"quantity\": 1\n    }\n  ],\n  \"total\": 55.99,\n  \"status\": \"completed\",\n  \"date\": \"2025-10-27T17:35:00.000Z\"\n}",
+        "form": []
+      },
+      "tests": [],
+      "containerId": "compras-folder"
+    },
+    {
+      "id": "search-compras-by-status",
+      "name": "🔎 Buscar Compras por Estado",
+      "url": "https://68ff8330e02b16d1753e48c8.mockapi.io/compras/Compras?status={{status}}",
+      "method": "GET",
+      "sortNum": 45000,
+      "created": "2025-10-27T17:30:00.000Z",
+      "modified": "2025-10-27T17:30:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [
+        {
+          "name": "status",
+          "value": "completed",
+          "isPath": false
+        }
+      ],
+      "tests": [],
+      "containerId": "compras-folder"
+    }
+  ]
+}

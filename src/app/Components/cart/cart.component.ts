@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart-service.service';
 import { CartItem } from '../../Interfaces/IcartItem';
+import { AuthService } from '../../services/auth.service';
+import { UserSession } from '../../Interfaces/Isession';
 
 @Component({
   selector: 'app-cart',
@@ -18,13 +20,28 @@ export class CartComponent implements OnInit {
   
   // Total del carrito
   cartTotal: number = 0;
+  
+  // Estado de procesamiento
+  isProcessing: boolean = false;
+  
+  // Usuario actual
+  currentUser: UserSession | null = null;
 
-  constructor(private cartService: CartService) { }
+  constructor(
+    private cartService: CartService, 
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     // Obtenemos los productos del carrito desde el servicio
     this.cartItems = this.cartService.cartItems;
     this.calculateTotal();
+    
+    // Obtenemos el usuario actual
+    this.authService.user$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   // Método para eliminar un producto del carrito
@@ -50,4 +67,24 @@ export class CartComponent implements OnInit {
       return total + (item.product.price * item.quantity);
     }, 0);
   }
+
+  // Método para proceder al pago
+  proceedToPayment(): void {
+    // Verificar que hay items en el carrito
+    if (this.cartItems.length === 0) {
+      alert('El carrito está vacío');
+      return;
+    }
+
+    // Verificar que el usuario está logueado
+    if (!this.currentUser) {
+      alert('Debes estar logueado para realizar una compra');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    // Navegar al componente de payment
+    this.router.navigate(['/payment']);
+  }
+
 }

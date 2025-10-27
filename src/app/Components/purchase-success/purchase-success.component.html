@@ -1,0 +1,155 @@
+<!-- Mensaje de carga -->
+<div class="container mt-4 text-center" *ngIf="isLoading">
+  <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <span class="ms-3">Procesando tu compra...</span>
+  </div>
+</div>
+
+<div class="container mt-4" *ngIf="purchase && !isLoading">
+  <!-- Mensaje de Éxito -->
+  <div class="success-header text-center mb-4">
+    <i class="bi bi-check-circle-fill success-icon"></i>
+    <h2 class="success-title">¡Compra Realizada Exitosamente!</h2>
+    <p class="success-subtitle">Tu pedido ha sido procesado correctamente</p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <!-- Factura -->
+      <div class="card invoice-card">
+        <div class="card-header invoice-header">
+          <div class="header-content d-flex justify-content-between align-items-start">
+            <div>
+              <h3 class="company-name mb-1">Tienda Beltran</h3>
+              <p class="company-subtitle mb-0">Factura Electrónica</p>
+            </div>
+            <div class="invoice-info text-end">
+              <p class="invoice-number mb-1">Factura #{{ purchase.compraId || 'N/A' }}</p>
+              <p class="invoice-date mb-0">{{ formatDate(purchase.date) }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <!-- Información del Cliente -->
+          <div class="customer-info mb-4">
+            <h4 class="section-title">
+              <i class="bi bi-person-fill me-2"></i>
+              Información del Cliente
+            </h4>
+            <div class="row">
+              <div class="col-md-4 mb-2">
+                <div class="info-item p-3 bg-light rounded border-start border-primary border-4">
+                  <span class="info-label fw-semibold text-secondary">Cliente ID:</span><br>
+                  <span class="info-value">{{ purchase.userId }}</span>
+                </div>
+              </div>
+              <div class="col-md-4 mb-2">
+                <div class="info-item p-3 bg-light rounded border-start border-primary border-4">
+                  <span class="info-label fw-semibold text-secondary">Email:</span><br>
+                  <span class="info-value">{{ purchase.customerEmail }}</span>
+                </div>
+              </div>
+              <div class="col-md-4 mb-2">
+                <div class="info-item p-3 bg-light rounded border-start border-success border-4">
+                  <span class="info-label fw-semibold text-secondary">Estado:</span><br>
+                  <span class="info-value text-success fw-bold">{{ purchase.status | titlecase }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <!-- Detalles de los Productos -->
+          <div class="products-section">
+            <h4 class="section-title">
+              Productos Comprados
+            </h4>
+            
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class="table-primary">
+                  <tr>
+                    <th scope="col">Producto</th>
+                    <th scope="col" class="text-center">Cantidad</th>
+                    <th scope="col" class="text-end">Precio Unit.</th>
+                    <th scope="col" class="text-end">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of purchase.items">
+                    <td>
+                      <div class="product-info">
+                        <span class="product-title d-block">{{ item.title }}</span>
+                        <small class="product-id text-muted">ID: {{ item.productId }}</small>
+                      </div>
+                    </td>
+                    <td class="text-center">{{ item.quantity }}</td>
+                    <td class="text-end">${{ item.price | number:'1.2-2' }}</td>
+                    <td class="text-end">
+                      <strong>${{ (item.price * item.quantity) | number:'1.2-2' }}</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <!-- Resumen de Totales -->
+          <div class="totals-section">
+            <div class="row justify-content-end">
+              <div class="col-md-6">
+                <div class="totals-card p-4 bg-light rounded">
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="total-label">Subtotal:</span>
+                    <span class="total-value">${{ calculateSubtotal() | number:'1.2-2' }}</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <span class="total-label">IVA (21%):</span>
+                    <span class="total-value">${{ calculateTax() | number:'1.2-2' }}</span>
+                  </div>
+                  <hr>
+                  <div class="d-flex justify-content-between final-total">
+                    <span class="total-label fs-5 fw-bold">Total:</span>
+                    <span class="total-value fs-4 fw-bold text-primary">${{ purchase.total | number:'1.2-2' }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Información Adicional -->
+          <div class="additional-info mt-4">
+            <hr class="section-divider">
+            <div class="alert alert-info d-flex align-items-start">
+              <i class="bi bi-info-circle-fill me-3 mt-1"></i>
+              <div class="info-text">
+                <p class="mb-2"><strong>Método de Pago:</strong> Tarjeta de Crédito</p>
+                <p class="mb-2"><strong>Tiempo estimado de entrega:</strong> 3-5 días hábiles</p>
+                <p class="mb-0"><strong>Número de seguimiento:</strong> Se enviará por email una vez despachado</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer invoice-actions bg-light">
+          <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+            <div class="d-flex gap-2">
+            </div>
+            
+            <button class="btn btn-primary" (click)="goToProducts()">
+              <i class="bi bi-bag-plus me-1"></i>
+              Seguir Comprando
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
