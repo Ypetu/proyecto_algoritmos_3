@@ -23,10 +23,27 @@
       <p class="mb-4">{{ product.description }}</p>
       
       
-      <div class="d-flex">
-        <button class="btn btn-primary me-2">
-          <i class="bi bi-cart-plus me-1"></i> Agregar al carrito
+      <div class="d-flex flex-wrap gap-2">
+        <!-- Botón para agregar o quitar del carrito (mismo patrón que product-list) -->
+        <button 
+          class="btn me-2" 
+          [ngClass]="{'btn-primary': !productsInCart[product.id], 'btn-danger': productsInCart[product.id]}" 
+          (click)="toggleProductCart(product.id)">
+          <i class="bi" 
+             [ngClass]="{'bi-cart-plus': !productsInCart[product.id], 'bi-cart-dash': productsInCart[product.id]}" 
+             aria-hidden="true"></i>
+          {{ productsInCart[product.id] ? 'Quitar del carrito' : 'Agregar al carrito' }}
         </button>
+        
+        <!-- Botón Ir al Carrito (aparece solo cuando está en el carrito) -->
+        <button 
+          *ngIf="productsInCart[product.id]" 
+          class="btn btn-success me-2"
+          (click)="goToCart()">
+          <i class="bi bi-cart-check me-1"></i> Ir al carrito
+        </button>
+        
+        <!-- Botón Volver -->
         <button class="btn btn-outline-secondary" [routerLink]="['/product-list']">
           <i class="bi bi-arrow-left me-1"></i> Volver a la lista
         </button>
